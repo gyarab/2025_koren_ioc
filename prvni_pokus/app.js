@@ -135,7 +135,8 @@ navItems.forEach(item=>{
 const mapCanvas=document.getElementById('mapCanvas');
 const ctxMap=mapCanvas.getContext('2d');
 const mapImage=new Image();
-mapImage.src='mapa.png';
+mapImage.src='prvni_pokus/mapa.png';
+
 mapImage.onload=()=>{ ctxMap.drawImage(mapImage,0,0,mapCanvas.width,mapCanvas.height); };
 
 function drawDot(x,y){
@@ -203,11 +204,22 @@ async function loadTeacherDashboard(){
     list.innerHTML='<li>Nacitam...</li>';
     const db=await readDB();
     list.innerHTML='';
+
+    // vykresli vsechny uzivatele jako tecky
+    ctxMap.clearRect(0,0,mapCanvas.width,mapCanvas.height);
+    ctxMap.drawImage(mapImage,0,0,mapCanvas.width,mapCanvas.height);
+
     Object.entries(db.users).forEach(([user,coords])=>{
         const scans=db.scans.filter(d=>d.user===user);
         const li=document.createElement('li');
         li.innerHTML=`<strong>${user}</strong><br>Poloha: ${coords.x}, ${coords.y}<br>Čas: ${coords.time}<br>QR: ${scans.length}`;
         list.appendChild(li);
+
+        // vykreslení tečky na mapě
+        ctxMap.fillStyle = (user==='teacher') ? 'blue' : 'green';
+        ctxMap.beginPath();
+        ctxMap.arc(coords.x,coords.y,6,0,2*Math.PI);
+        ctxMap.fill();
     });
 }
 
