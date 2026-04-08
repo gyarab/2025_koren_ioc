@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Orientační Běh - QR Tracker</title>
-<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -42,7 +42,6 @@
     <h2>Vítejte!</h2>
     <p>Začni běh a skenuj QR kódy na trati.</p>
     <canvas id="mapCanvas" width="400" height="400"></canvas>
-    <div id="locationOutput">Klikni na mapu pro nastavení polohy</div>
   </section>
 
   <!-- Scanner -->
@@ -50,7 +49,6 @@
     <h2>Scanner</h2>
     <video id="video" autoplay></video>
     <canvas id="canvas" style="display:none;"></canvas>
-    <div id="scanOutput">Zatím nic naskenováno</div>
     <button id="startScan">Start Scan</button>
   </section>
 
@@ -63,6 +61,7 @@
   <!-- Teacher Dashboard -->
   <section id="teacher" class="view">
     <h2>Dashboard Učitele</h2>
+    <button id="createRunBtn">Vytvořit nový běh</button>
     <ul id="teacherList"></ul>
   </section>
 
@@ -70,13 +69,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 <script src="app.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(()=>console.log('SW registrovan'))
-      .catch(err=>console.error('Chyba registrace SW:',err));
-}
-</script>
-
 </body>
 </html>
