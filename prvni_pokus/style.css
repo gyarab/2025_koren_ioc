@@ -1,14 +1,20 @@
+/* --- GLOBAL --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    background: #f4f4f4;
+    color: #333;
 }
 
 header {
     display: flex;
     align-items: center;
-    background: #333;
+    background: #2b7bd3;
     color: white;
-    padding: 10px;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 #menuToggle {
@@ -24,17 +30,18 @@ h1 {
     margin: 0;
 }
 
-/* Sidebar */
+/* --- SIDEBAR --- */
 #sidebar {
     position: fixed;
-    left: -200px;
+    left: -220px;
     top: 0;
-    width: 200px;
+    width: 220px;
     height: 100%;
-    background: #333;
+    background: #2b7bd3;
     color: white;
-    transition: 0.3s;
+    transition: left 0.3s;
     padding-top: 60px;
+    overflow-y: auto;
 }
 
 #sidebar.open {
@@ -49,29 +56,68 @@ h1 {
 #sidebar li {
     padding: 15px;
     cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 #sidebar li:hover {
-    background: #555;
+    background: #1a5fa8;
 }
 
-/* Views */
+/* --- VIEWS --- */
 .view {
     display: none;
     padding: 20px;
+    margin-left: 0;
+    transition: margin-left 0.3s;
 }
 
 .view.active {
     display: block;
 }
 
-/* Map */
+/* --- MAP --- */
 #mapCanvas {
     border: 2px solid black;
     margin-top: 10px;
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    display: block;
 }
 
-/* Toast */
+/* --- SCANNER --- */
+#video {
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid black;
+    margin-bottom: 10px;
+}
+
+/* --- BUTTONS --- */
+button {
+    background: #2b7bd3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:hover {
+    background: #1a5fa8;
+}
+
+/* --- INPUTS --- */
+input[type="text"], input[type="password"], input[type="number"] {
+    padding: 8px;
+    width: calc(100% - 20px);
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* --- TOAST --- */
 .toast {
     position: fixed;
     bottom: 20px;
@@ -88,4 +134,34 @@ h1 {
 
 .toast-show {
     opacity: 1;
+}
+
+/* --- TEACHER DASHBOARD --- */
+#teacherList li {
+    padding: 10px;
+    background: white;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#qrOutput {
+    display: block;
+    margin-top: 10px;
+    max-width: 200px;
+}
+
+/* --- RESPONSIVE --- */
+@media (min-width: 600px) {
+    .view {
+        margin-left: 240px;
+    }
+
+    #sidebar {
+        left: 0;
+    }
+
+    #sidebar.closed {
+        left: -220px;
+    }
 }
